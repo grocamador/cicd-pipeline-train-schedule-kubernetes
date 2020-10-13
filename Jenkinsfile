@@ -38,9 +38,10 @@ pipeline {
                 }
             }
         }
-    stage('List pods') {
-    withKubeConfig([credentialsId: 'kubeconfig']) {
-        sh 'kubectl get pods'
+        stage('List pods') {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+                sh 'kubectl get pods'
+                }
         }
     }
 }
