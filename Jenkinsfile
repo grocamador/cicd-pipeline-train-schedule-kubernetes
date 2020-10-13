@@ -40,7 +40,7 @@ pipeline {
         }
     stage('List pods') {
     withKubeConfig([credentialsId: 'kubeconfig']) {
-      sh 'kubectl get pods'
-    }
+        sh 'kubectl get pods'
+        }
     }
 }
