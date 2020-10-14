@@ -66,13 +66,22 @@ pipeline {
             when {
                 branch 'master'
             }
+             steps {
+                input 'Deploy to Production?'
+
             steps { 
-                
-                sh ("""
-                echo \$KUBECONFIG
-                kubectl apply -f deploy.yml
+                   milestone(1)
+//              With KUBECTL and Kubeconfig       
+
+//              sh ("""                
+//                  echo \$KUBECONFIG
+//                  kubectl apply -f deploy.yml
                 """)
- 
+                 kubernetesDeploy(
+                    kubeconfigId: 'kubeconfig',
+                    configs: 'deploy.yml',
+                    enableConfigSubstitution: true
+                )
              }
             post{
                 success{
