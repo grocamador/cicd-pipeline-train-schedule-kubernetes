@@ -73,7 +73,7 @@ pipeline {
 
               sh ("""                
                   echo \$KUBECONFIG
-                  kubectl apply -f deploy.yml
+                  kubectl apply -f train-schedule-kube.yml
                 """)
                 
 //                 kubernetesDeploy(
@@ -82,14 +82,7 @@ pipeline {
 //                    enableConfigSubstitution: true
 //                )
 
-                post{
-                    success{
-                    echo "Successfully deployed to Production"
-                    }
-                    failure{
-                    echo "Failed deploying to Production"
-                    }
-                }
+                
              }
          }
     }
