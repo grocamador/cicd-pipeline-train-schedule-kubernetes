@@ -8,6 +8,7 @@ pipeline {
         CHKP_CLOUDGUARD_SECRET = credentials("ivan-pass")
         SG_CLIENT_ID = credentials("sg-client")
         SG_SECRET_KEY = credentials("sg-secret")
+        KUBECONFIG = credentials("my-kubeconifg")
 
         }
     
@@ -66,7 +67,11 @@ pipeline {
                 branch 'master'
             }
             steps { 
-                kubernetesDeploy kubeconfigId: 'kubeconfig', configs: 'deploy.yml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+                
+                sh ("""
+                echo \$KUBECONFIG
+                kubectl apply -f deploy.yml
+                """)
  
              }
             post{
