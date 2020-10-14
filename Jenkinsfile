@@ -1,13 +1,17 @@
 pipeline {
     agent any
+    
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
         CHKP_CLOUDGUARD_ID = credentials("CHKP_CLOUDGUARD_ID")
         CHKP_CLOUDGUARD_SECRET = credentials("CHKP_CLOUDGUARD_SECRET")
-        
-    }
+        echo "My CHKP_CLOUDGUARD_ID = $CHKP_CLOUDGUARD_ID"
+        echo "My CHKP_CLOUDGUARD_SECRET = $CHKP_CLOUDGUARD_SECRET"
+        }
+    
     stages {
+        
        stage('ShiftLeft Code Scan') {   
             steps {   
                    script {      
@@ -19,6 +23,7 @@ pipeline {
                          }
                    }
             }
+         
          }
         
         stage('Build') {
