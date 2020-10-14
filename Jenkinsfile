@@ -3,7 +3,27 @@ pipeline {
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
+        CHKP_CLOUDGUARD_ID = credentials("CHKP_CLOUDGUARD_ID")
+        CHKP_CLOUDGUARD_SECRET = credentials("CHKP_CLOUDGUARD_SECRET")
+        
     }
+     stage('ShiftLeft Code Scan') {   
+       steps {   
+                   
+         script {      
+              try {
+                sh 'chmod +x shiftleft' 
+
+                sh './shiftleft code-scan -s .'
+           
+               } catch (Exception e) {
+    
+                 echo "Request for Approval"  
+                  
+                  }
+              }
+            }
+         }
     stages {
         stage('Build') {
             steps {
