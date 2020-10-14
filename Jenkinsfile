@@ -4,9 +4,9 @@ pipeline {
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
-        CHKP_CLOUDGUARD_ID = credentials("ivan-user")
-        CHKP_CLOUDGUARD_SECRET = credentials("ivan-pass")
-        SG_CLIENT_ID = credentials("sg-client")
+        CHKP_CLOUDGUARD_ID = credentials("chkp-id")
+        CHKP_CLOUDGUARD_SECRET = credentials("chkp-key")
+       SG_CLIENT_ID = credentials("sg-client")
         SG_SECRET_KEY = credentials("sg-secret")
         KUBECONFIG = credentials("my-kubeconfig")
 
