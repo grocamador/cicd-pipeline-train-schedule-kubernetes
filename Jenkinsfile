@@ -4,8 +4,10 @@ pipeline {
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
-        CHKP_CLOUDGUARD_ID = credentials("CHKP_CLOUDGUARD_ID")
-        CHKP_CLOUDGUARD_SECRET = credentials("CHKP_CLOUDGUARD_SECRET")
+        CHKP_CLOUDGUARD_ID = credentials("ivan-user")
+        CHKP_CLOUDGUARD_SECRET = credentials("ivan-pass")
+        SG_CLIENT_ID = credentials("sg-client")
+        SG_SECRET_KEY = credentials("sg-secret")
 
         }
     
@@ -64,7 +66,7 @@ pipeline {
                 branch 'master'
             }
             steps { 
-                kubernetesDeploy kubeconfigId: 'kubeconfig', configs: 'train-schedule-kube.yml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+                kubernetesDeploy kubeconfigId: 'kubeconfig', configs: 'deploy.yml', enableConfigSubstitution: true  // REPLACE kubeconfigId
  
              }
             post{
