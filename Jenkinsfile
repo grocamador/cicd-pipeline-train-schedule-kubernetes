@@ -76,11 +76,11 @@ pipeline {
 //                  kubectl apply -f deploy.yml
 //                """)
                 
-                 kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'deploy.yml',
-                    enableConfigSubstitution: true
-                )
+//                 kubernetesDeploy(
+//                    kubeconfigId: 'kubeconfig',
+//                    configs: 'deploy.yml',
+//                    enableConfigSubstitution: true
+//                )
 
                 post{
                     success{
