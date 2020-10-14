@@ -6,8 +6,6 @@ pipeline {
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
         CHKP_CLOUDGUARD_ID = credentials("CHKP_CLOUDGUARD_ID")
         CHKP_CLOUDGUARD_SECRET = credentials("CHKP_CLOUDGUARD_SECRET")
-        echo "My CHKP_CLOUDGUARD_ID = $CHKP_CLOUDGUARD_ID"
-        echo "My CHKP_CLOUDGUARD_SECRET = $CHKP_CLOUDGUARD_SECRET"
         }
     
     stages {
