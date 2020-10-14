@@ -82,13 +82,15 @@ pipeline {
                     enableConfigSubstitution: true
                 )
 
-                 post{
+                post{
                     success{
                     echo "Successfully deployed to Production"
                     }
                     failure{
                     echo "Failed deploying to Production"
                     }
-            }
-        }
+                }
+             }
+         }
+    }
 }
