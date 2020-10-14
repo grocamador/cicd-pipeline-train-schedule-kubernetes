@@ -7,24 +7,20 @@ pipeline {
         CHKP_CLOUDGUARD_SECRET = credentials("CHKP_CLOUDGUARD_SECRET")
         
     }
-     stage('ShiftLeft Code Scan') {   
-       steps {   
-                   
-         script {      
-              try {
-                sh 'chmod +x shiftleft' 
-
-                sh './shiftleft code-scan -s .'
-           
-               } catch (Exception e) {
-    
-                 echo "Request for Approval"  
-                  
-                  }
-              }
+    stages {
+       stage('ShiftLeft Code Scan') {   
+            steps {   
+                   script {      
+                        try {
+                            sh 'chmod +x shiftleft' 
+                            sh './shiftleft code-scan -s .'
+                        } catch (Exception e) {
+                            echo "Request for Approval"  
+                         }
+                   }
             }
          }
-    stages {
+        
         stage('Build') {
             steps {
                 echo 'Running build automation'
