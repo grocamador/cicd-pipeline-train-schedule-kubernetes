@@ -71,10 +71,10 @@ pipeline {
                   milestone(1)
 //              With KUBECTL and Kubeconfig       
 
-//              sh ("""                
-//                  echo \$KUBECONFIG
-//                  kubectl apply -f deploy.yml
-//                """)
+              sh ("""                
+                  echo \$KUBECONFIG
+                  kubectl apply -f deploy.yml
+                """)
                 
 //                 kubernetesDeploy(
 //                    kubeconfigId: 'kubeconfig',
