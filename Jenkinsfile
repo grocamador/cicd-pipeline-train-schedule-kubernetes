@@ -8,7 +8,7 @@ pipeline {
         CHKP_CLOUDGUARD_SECRET = credentials("ivan-pass")
         SG_CLIENT_ID = credentials("sg-client")
         SG_SECRET_KEY = credentials("sg-secret")
-        KUBECONFIG = credentials("my-kubeconifg")
+        KUBECONFIG = credentials("my-kubeconfig")
 
         }
     
