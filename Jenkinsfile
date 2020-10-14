@@ -38,10 +38,24 @@ pipeline {
                 }
             }
         }
-        stage('List pods') {
-            withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh 'kubectl get pods'
+        
+       stage("Deploy to Production"){
+            when {
+                branch 'master'
+            }
+            steps { 
+                kubernetesDeploy kubeconfigId: 'kubeconfig', configs: 'train-schedule-kube.yml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+ 
+             }
+            post{
+                success{
+                    echo "Successfully deployed to Production"
                 }
+                failure{
+                    echo "Failed deploying to Production"
+                }
+            }
         }
+  
     }
 }
