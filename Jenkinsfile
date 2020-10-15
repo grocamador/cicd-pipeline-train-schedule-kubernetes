@@ -68,7 +68,9 @@ pipeline {
             }
             steps {
                 
-            sh ("""                
+            sh ("""   
+                  kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule:1
+                  kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule:latest
                   kubectl apply -f train-schedule-kube-stage.yml
                 """)
  
@@ -89,11 +91,11 @@ pipeline {
 
               sh ("""                
                   echo \$KUBECONFIG
- 
+                  kubectl set image deployment/train-schedule-deployment train-schedule-stage=grocamador/train-schedule:1
+                  kubectl set image deployment/train-schedule-deployment train-schedule-stage=grocamador/train-schedule:latest
                   kubectl apply -f train-schedule-kube.yml
                 """)
-//           kubectl set image deployment/my-deployment mycontainer=myimage:latest
-//           kubectl set image deployment/my-deployment mycontainer=myimage 
+
                  
 //                 kubernetesDeploy(
 //                    kubeconfigId: 'kubeconfig',
