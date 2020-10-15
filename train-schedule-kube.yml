@@ -32,5 +32,6 @@ spec:
       containers:
       - name: train-schedule
         image: grocamador/train-schedule:latest
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
