@@ -69,7 +69,7 @@ pipeline {
             steps {
                 
             sh ("""                
-                  kubectl replace -f train-schedule-kube-stage.yml
+                  kubectl apply -f train-schedule-kube-stage.yml
                 """)
  
                 // Other tentative that didnt work:
@@ -89,11 +89,12 @@ pipeline {
 
               sh ("""                
                   echo \$KUBECONFIG
-       //           kubectl set image deployment/my-deployment mycontainer=myimage:latest
-       //           kubectl set image deployment/my-deployment mycontainer=myimage
+ 
                   kubectl apply -f train-schedule-kube.yml
                 """)
-                
+//           kubectl set image deployment/my-deployment mycontainer=myimage:latest
+//           kubectl set image deployment/my-deployment mycontainer=myimage 
+                 
 //                 kubernetesDeploy(
 //                    kubeconfigId: 'kubeconfig',
 //                    configs: 'deploy.yml',
