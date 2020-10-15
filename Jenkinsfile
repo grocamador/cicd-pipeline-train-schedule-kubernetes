@@ -69,11 +69,12 @@ pipeline {
             steps {
                 
             sh ("""                
-      //            kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule
-      //            kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule:latest
                   kubectl replace -f train-schedule-kube-stage.yml
                 """)
-            
+ 
+                // Other tentative that didnt work:
+ //            kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule
+ //            kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule:latest
             }
         }
         
