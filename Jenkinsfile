@@ -68,7 +68,8 @@ pipeline {
             steps {
                 
             sh ("""                
-  
+                  kubectl set image deployment/my-deployment mycontainer=myimage:latest
+                  kubectl set image deployment/my-deployment mycontainer=myimage
                   kubectl apply -f train-schedule-kube-stage.yml
                 """)
             
@@ -86,6 +87,8 @@ pipeline {
 
               sh ("""                
                   echo \$KUBECONFIG
+                  kubectl set image deployment/my-deployment mycontainer=myimage:latest
+                  kubectl set image deployment/my-deployment mycontainer=myimage
                   kubectl apply -f train-schedule-kube.yml
                 """)
                 
