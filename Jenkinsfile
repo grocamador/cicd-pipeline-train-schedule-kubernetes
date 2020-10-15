@@ -69,8 +69,7 @@ pipeline {
             steps {
                 
             sh ("""   
-                  kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule:1
-                  kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule:latest
+                  kubectl delete -f train-schedule-kube-stage.yml
                   kubectl apply -f train-schedule-kube-stage.yml
                 """)
  
@@ -91,8 +90,7 @@ pipeline {
 
               sh ("""                
                   echo \$KUBECONFIG
-                  kubectl set image deployment/train-schedule-deployment train-schedule-stage=grocamador/train-schedule:1
-                  kubectl set image deployment/train-schedule-deployment train-schedule-stage=grocamador/train-schedule:latest
+                  kubectl delete -f train-schedule-kube.yml
                   kubectl apply -f train-schedule-kube.yml
                 """)
 
