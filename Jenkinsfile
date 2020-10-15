@@ -16,13 +16,14 @@ pipeline {
         
        stage('ShiftLeft Code Scan') {   
             steps {   
-                   script {      
-                        try {
-                            sh 'chmod +x shiftleft' 
-                            sh './shiftleft code-scan -s .'
-                        } catch (Exception e) {
-                            echo "Request for Approval"  
-                         }
+            echo 'Skipping codescan'    
+ //                  script {      
+ //                       try {
+ //                           sh 'chmod +x shiftleft' 
+ //                           sh './shiftleft code-scan -s .'
+ //                       } catch (Exception e) {
+ //                           echo "Request for Approval"  
+ //                       }
                    }
             }
          
