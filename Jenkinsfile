@@ -67,12 +67,8 @@ pipeline {
                 branch 'master'
             }
             steps {
-            try {
-             sh 'kubectl delete -f train-schedule-kube-stage.yml'
-            } catch (Exception e) {
-             sh 'echo "Not existing yet in stage"'
-            }
             sh ("""     
+                  kubectl delete -f train-schedule-kube-stage.yml
                   kubectl apply -f train-schedule-kube-stage.yml
                 """)
  
@@ -86,18 +82,13 @@ pipeline {
             when {
                 branch 'master'
             }
-             steps {
-                 
+             steps {              
                 input 'Deploy to Production?'
-                  milestone(1)
+                milestone(1)
 //              With KUBECTL and Kubeconfig       
-             try {
-             sh 'kubectl delete -f train-schedule-kube.yml'
-            } catch (Exception e) {
-             sh 'echo "Not existing yet in prod"'
-            }
               sh ("""                
                   echo \$KUBECONFIG
+                  kubectl delete -f train-schedule-kube.ym
                   kubectl apply -f train-schedule-kube.yml
                 """)
 
