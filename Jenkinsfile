@@ -88,7 +88,7 @@ pipeline {
 //              With KUBECTL and Kubeconfig       
               sh ("""                
                   echo \$KUBECONFIG
-                  kubectl delete -f train-schedule-kube.ym
+                  kubectl delete -f train-schedule-kube.yml
                   kubectl apply -f train-schedule-kube.yml
                 """)
 
