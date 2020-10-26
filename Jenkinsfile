@@ -22,7 +22,7 @@ pipeline {
                             sh 'chmod +x shiftleft' 
                             sh './shiftleft code-scan -s .'
                         } catch (Exception e) {
-                            input "Code scan failed, Are you sure you want to continue?"  
+                            input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
                    }
             }
@@ -49,6 +49,22 @@ pipeline {
                 }
             }
         }
+        stage('Image Assurance scanning') {   
+            steps {   
+            echo 'Launching image vulnerability scanning'    
+                   script {      
+                        try {
+                            sh "docker save -o train-schedule.tar grocamador/train-schedule:${env.BUILD_NUMBER}"
+                            sh 'chmod +x shiftleft' 
+                            sh './shiftleft image-scan -i train-schedule.tar'
+                         
+                        } catch (Exception e) {
+                            input "Image scan found vulnerabilities, Are you sure you want to continue?"  
+                        }
+                   }
+            }
+         
+         }
         stage('Push Docker Image') {
             when {
                 branch 'master'
