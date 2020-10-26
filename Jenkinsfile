@@ -4,8 +4,8 @@ pipeline {
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
-        CHKP_CLOUDGUARD_ID = credentials("chkp-id")
-       CHKP_CLOUDGUARD_SECRET = credentials("chkp-key")
+    //     CHKP_CLOUDGUARD_ID = credentials("chkp-id")
+    //    CHKP_CLOUDGUARD_SECRET = credentials("chkp-key")
        SG_CLIENT_ID = credentials("sg-client")
         SG_SECRET_KEY = credentials("sg-secret")
         KUBECONFIG = credentials("my-kubeconfig")
@@ -17,14 +17,14 @@ pipeline {
        stage('ShiftLeft Code Scan') {   
             steps {   
             echo 'Skipping codescan'    
-                   script {      
-                        try {
-                            sh 'chmod +x shiftleft' 
-                            sh './shiftleft code-scan -s .'
-                        } catch (Exception e) {
-                            input "Code scan showed some security issues, Are you sure you want to continue?"  
-                        }
-                   }
+                //    script {      
+                //         try {
+                //             sh 'chmod +x shiftleft' 
+                //             sh './shiftleft code-scan -s .'
+                //         } catch (Exception e) {
+                //             input "Code scan showed some security issues, Are you sure you want to continue?"  
+                //         }
+                //    }
             }
          
          }
@@ -67,8 +67,8 @@ pipeline {
             echo 'Launching image vulnerability scanning'    
                    script {      
                         try {
-                            sh "docker pull grocamador/train-schedule:${env.BUILD_NUMBER}"
-                            sh "docker save -o train-schedule.tar grocamador/train-schedule:${env.BUILD_NUMBER}"
+                            // sh "docker pull grocamador/train-schedule:${env.BUILD_NUMBER}"
+                            // sh "docker save -o train-schedule.tar grocamador/train-schedule:${env.BUILD_NUMBER}"
                             sh 'chmod +x shiftleft' 
                             sh './shiftleft image-scan -i train-schedule.tar'
                          
