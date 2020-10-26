@@ -67,6 +67,7 @@ pipeline {
             echo 'Launching image vulnerability scanning'    
                    script {      
                         try {
+                            sh "docker pull grocamador/train-schedule:${env.BUILD_NUMBER}"
                             sh "docker save -o train-schedule.tar grocamador/train-schedule:${env.BUILD_NUMBER}"
                             sh 'chmod +x shiftleft' 
                             sh './shiftleft image-scan -i train-schedule.tar'
