@@ -95,11 +95,14 @@ pipeline {
         }
         stage('Clean') {
         steps{
-            try{
-            sh 'rm train-schedule.tar'
-            echo 'Image deleted'
+            echo 'cleaning up artifacts'
+                script{
+                try{
+                sh 'rm train-schedule.tar'
+                echo 'Image deleted'
                 } catch (Exception e) {
                 echo 'Already deleted'  
+                }
                 }
             }
         }
