@@ -20,7 +20,7 @@ pipeline {
                    script {      
                         try {
                             sh 'chmod +x shiftleft' 
-                            sh './shiftleft code-scan -s .'
+                            sh './shiftleft code-scan -x views -s cicd-pipeline-train-schedule-kubernetes'
                         } catch (Exception e) {
                             input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
