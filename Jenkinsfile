@@ -2,12 +2,12 @@ pipeline {
     agent any
     
     environment {
-        //be sure to replace "willbla" with your own Docker Hub username
+        //be sure to replace "grocamador" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
     //     CHKP_CLOUDGUARD_ID = credentials("chkp-id")
     //    CHKP_CLOUDGUARD_SECRET = credentials("chkp-key")
-        // SG_CLIENT_ID = credentials("cp-fr-id")
-        // SG_SECRET_KEY = credentials("cp-fr-key")
+        SG_CLIENT_ID = credentials("source-id")
+        SG_SECRET_KEY = credentials("source-key")
         KUBECONFIG = credentials("my-kubeconfig")
 
         }
