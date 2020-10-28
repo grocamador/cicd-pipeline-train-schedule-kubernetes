@@ -13,11 +13,10 @@ pipeline {
         }
     
     stages {
-        
        stage('ShiftLeft secure Code Scan') {   
             steps {   
-            echo 'Scan of code source    
-                   script {      
+            echo 'Scan of code source'    
+                    script {      
                         try {
                             sh 'ls'
                             sh 'chmod +x shiftleft' 
