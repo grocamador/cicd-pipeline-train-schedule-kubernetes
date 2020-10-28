@@ -6,8 +6,8 @@ pipeline {
         DOCKER_IMAGE_NAME = "grocamador/train-schedule"
     //     CHKP_CLOUDGUARD_ID = credentials("chkp-id")
     //    CHKP_CLOUDGUARD_SECRET = credentials("chkp-key")
-        SG_CLIENT_ID = credentials("jb-sg-id")
-        SG_SECRET_KEY = credentials("jb-sg-key")
+        SG_CLIENT_ID = credentials("cp-se-id")
+        SG_SECRET_KEY = credentials("cp-se-key")
         KUBECONFIG = credentials("my-kubeconfig")
 
         }
