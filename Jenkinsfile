@@ -19,6 +19,7 @@ pipeline {
             echo 'Skipping codescan'    
                    script {      
                         try {
+                            sh 'ls'
                             sh 'chmod +x shiftleft' 
                             sh './shiftleft code-scan -x views -s cicd-pipeline-train-schedule-kubernetes'
                         } catch (Exception e) {
