@@ -14,15 +14,14 @@ pipeline {
     
     stages {
         
-       stage('ShiftLeft Code Scan') {   
+       stage('ShiftLeft secure Code Scan') {   
             steps {   
-            echo 'Skipping codescan'    
+            echo 'Scan of code source    
                    script {      
                         try {
                             sh 'ls'
-                            sh 'pwd'
-                            // sh 'chmod +x shiftleft' 
-                            // sh './shiftleft code-scan -s .'
+                            sh 'chmod +x shiftleft' 
+                            sh './shiftleft code-scan -s .'
                         } catch (Exception e) {
                             input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
@@ -66,7 +65,7 @@ pipeline {
         }
         stage('Image Assurance scanning') {   
             steps {   
-            echo 'Skipping image vulnerability scanning'    
+            echo 'Image vulnerability scanning'    
                    script {      
                         try {
                             sh "docker pull grocamador/train-schedule:${env.BUILD_NUMBER}"
