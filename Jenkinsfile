@@ -20,6 +20,7 @@ pipeline {
                    script {      
                         try {
                             sh 'ls'
+                            sh 'pwd'
                             sh 'chmod +x shiftleft' 
                             sh './shiftleft code-scan -s .'
                         } catch (Exception e) {
