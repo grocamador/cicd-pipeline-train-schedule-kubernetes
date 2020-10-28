@@ -94,12 +94,14 @@ pipeline {
             }
         }
         stage('Clean') {
+        steps{
             try{
             sh 'rm train-schedule.tar'
             echo 'Image deleted'
-            } catch (Exception e) {
-                            echo 'Already deleted'  
-                        }
+                } catch (Exception e) {
+                echo 'Already deleted'  
+                }
+            }
         }
         stage('Deploy to stage') {
             when {
