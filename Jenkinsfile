@@ -7,7 +7,7 @@ pipeline {
     //     CHKP_CLOUDGUARD_ID = credentials("chkp-id")
     //    CHKP_CLOUDGUARD_SECRET = credentials("chkp-key")
         SG_CLIENT_ID = credentials("source-id")
-        SG_SECRET_KEY = credentials("source-key")
+        SG_SECRET_KEY = credentials("s-key")
         KUBECONFIG = credentials("my-kubeconfig")
 
         }
@@ -21,8 +21,8 @@ pipeline {
                         try {
                             sh 'ls'
                             sh 'pwd'
-                            sh 'chmod +x shiftleft' 
-                            sh './shiftleft code-scan -s .'
+                            // sh 'chmod +x shiftleft' 
+                            // sh './shiftleft code-scan -s .'
                         } catch (Exception e) {
                             input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
