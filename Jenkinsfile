@@ -21,7 +21,7 @@ pipeline {
                         try {
                             sh 'ls'
                             sh 'chmod +x shiftleft' 
-                            sh './shiftleft code-scan -x views -s cicd-pipeline-train-schedule-kubernetes'
+                            sh './shiftleft code-scan -x e <string -s .'
                         } catch (Exception e) {
                             input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
@@ -86,6 +86,7 @@ pipeline {
             }
             steps {
                 script {
+                    sh 'rm train-schedule.tar'
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
                         app.push("latest")
                     }
