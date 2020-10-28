@@ -21,7 +21,7 @@ pipeline {
                         try {
                             sh 'ls'
                             sh 'chmod +x shiftleft' 
-                            sh './shiftleft code-scan -x e <string -s .'
+                            sh './shiftleft code-scan -x train-schedule.tar -s .'
                         } catch (Exception e) {
                             input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
