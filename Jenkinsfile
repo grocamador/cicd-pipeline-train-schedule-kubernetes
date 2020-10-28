@@ -68,10 +68,10 @@ pipeline {
             echo 'Skipping image vulnerability scanning'    
                    script {      
                         try {
-                            // sh "docker pull grocamador/train-schedule:${env.BUILD_NUMBER}"
-                            // sh "docker save -o train-schedule.tar grocamador/train-schedule:${env.BUILD_NUMBER}"
-                            // sh 'chmod +x shiftleft' 
-                            // sh './shiftleft image-scan -i train-schedule.tar'
+                            sh "docker pull grocamador/train-schedule:${env.BUILD_NUMBER}"
+                            sh "docker save -o train-schedule.tar grocamador/train-schedule:${env.BUILD_NUMBER}"
+                            sh 'chmod +x shiftleft' 
+                            sh './shiftleft image-scan -i train-schedule.tar'
                          
                         } catch (Exception e) {
                             input "Image scan found vulnerabilities, Are you sure you want to continue?"  
@@ -86,12 +86,20 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'rm train-schedule.tar'
+                    
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
                         app.push("latest")
                     }
                 }
             }
+        }
+        stage('Clean') {
+            try{
+            sh 'rm train-schedule.tar'
+            echo 'Image deleted'
+            } catch (Exception e) {
+                            echo 'Already deleted'  
+                        }
         }
         stage('Deploy to stage') {
             when {
