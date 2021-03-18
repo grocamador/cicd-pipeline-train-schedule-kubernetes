@@ -18,9 +18,9 @@ pipeline {
             echo 'Scan of code source'    
                     script {      
                         try {
-                            sh 'ls'
+                           
                             sh 'chmod +x shiftleft' 
-                            sh './shiftleft code-scan -s . -x graddle/**'
+                            sh './shiftleft code-scan -x graddle/  -s .'
                         } catch (Exception e) {
                             input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
