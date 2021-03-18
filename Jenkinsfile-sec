@@ -88,6 +88,7 @@ pipeline {
                 script{
                 try{
                 sh 'rm train-schedule.tar'
+                sh "docker images prune -a --force"
                 echo 'Image deleted'
                 } catch (Exception e) {
                 echo 'Already deleted'  
