@@ -17,6 +17,7 @@ pipeline {
         
         stage('Test') {
             steps {
+                sh "docker images prune -a --force"
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
@@ -56,7 +57,7 @@ pipeline {
                    script {      
                         try {
                             sh "docker images -a"
-                            sh "docker save -o train-schedule.tar grocamador/train-schedule"
+                            sh "docker save grocamador/train-schedule -o train-schedule.tar"
                             sh 'chmod +x shiftleft' 
                             sh './shiftleft image-scan -i train-schedule.tar'
                          
