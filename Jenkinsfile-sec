@@ -28,7 +28,7 @@ pipeline {
                         try {
                            
                             sh 'chmod +x shiftleft' 
-                             sh './shiftleft code-scan -x graddle/  -s .'
+                             sh './shiftleft -t 50000 code-scan -x graddle/  -s .'
                         } catch (Exception e) {
                             input "Code scan showed some security issues, Are you sure you want to continue?"  
                         }
@@ -55,7 +55,7 @@ pipeline {
                             sh "docker images -a"
                             sh "docker save grocamador/train-schedule -o train-schedule.tar"
                             sh 'chmod +x shiftleft' 
-                            sh './shiftleft image-scan -i train-schedule.tar'
+                            sh './shiftleft -t 50000  image-scan -i train-schedule.tar'
                          
                         } catch (Exception e) {
                             input "Image scan found vulnerabilities, Are you sure you want to continue?"  
