@@ -24,6 +24,8 @@ stages {
             }
         steps {
                 echo 'Building docker image'
+                sh "pwd"
+                sh "cat /home/ubuntu/.kube/config"
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
