@@ -9,7 +9,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8080
-    nodePort: 8090
+    nodePort: 30090
 
 ---
 
@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: train-schedule-stage
-        image: grocamador/train-schedule:latest
+        image: grocamador/cicd-demo:latest
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
