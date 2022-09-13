@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = "grocamador/train-demo"
+        DOCKER_IMAGE_NAME = "grocamador/cicd-demo"
         }
     
     stages {
