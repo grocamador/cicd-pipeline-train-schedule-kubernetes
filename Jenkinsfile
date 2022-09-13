@@ -27,7 +27,6 @@ stages {
                 sh "aws eks --region us-east-1 update-kubeconfig --name groca-eks"
                 sh "kubectl config get-contexts"
                 sh "whoami"
-                sh "sudo -S cat /home/ubuntu/.kube/config"
                 sh "kubectl get pods -A"
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
