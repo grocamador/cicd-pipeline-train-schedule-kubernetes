@@ -53,6 +53,10 @@ stages {
             branch 'master'
         }
             steps {
+            echo "Getting existing pods"
+            sh "kubectl get pods -A"
+            echo "Getting nodes"
+            sh "kubectl get nodes"
             sh ("""     
                   kubectl delete -f train-schedule-kube-stage.yml
                   kubectl apply -f train-schedule-kube-stage.yml
