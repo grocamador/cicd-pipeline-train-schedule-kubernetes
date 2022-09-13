@@ -33,12 +33,17 @@ pipeline {
                 branch 'master'
             }
             steps {
-                script {
+
+                echo 'Pushing docker image with current build tag'
+                sh " docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
+                echo 'Pushing docker image with current latest'
+                sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
+/*              script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     
-                    }
+  */                  }
                 }
             }
         }
