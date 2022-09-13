@@ -36,7 +36,7 @@ stages {
         steps {
 
                 echo "Login in docker registry"
-                sh "sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"                		
+                sh "docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"                		
 	            echo 'Login Completed' 
                 echo "Pushing docker image with current build tag"
                 sh " docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
