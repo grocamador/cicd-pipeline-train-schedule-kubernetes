@@ -4,7 +4,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "grocamador/cicd-demo"
         }
     
-    stages {
+stages {
 
 /*
         stage('Test') {
@@ -17,43 +17,36 @@ pipeline {
 
 */
 
-     stage('Build Docker Image') {
+    stage('Build Docker Image') {
             when {
                 branch 'master'
             }
-            steps {
+        steps {
                 echo 'Building docker image'
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
 
 
-            stage('Push Docker Image') {
-            when {
-                branch 'master'
-            }
-            steps {
+    stage('Push Docker Image') {
+        when {
+            branch 'master'
+        }
+        steps {
 
                 echo 'Pushing docker image with current build tag'
                 sh " docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
                 echo 'Pushing docker image with current latest'
                 sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
-/*              script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
-                    
-  */                  }
-                }
             }
         }
-        
+            
 
 
-        stage('Deploy to stage') {
-            when {
-                branch 'master'
-            }
+    stage('Deploy to stage') {
+        when {
+            branch 'master'
+        }
             steps {
             sh ("""     
                   kubectl delete -f train-schedule-kube-stage.yml
@@ -64,7 +57,7 @@ pipeline {
         }
         
        stage("Deploy to Production"){
-            when {
+        when {
                 branch 'master'
             }
              steps {              
@@ -75,10 +68,6 @@ pipeline {
                   kubectl delete -f train-schedule-kube.yml
                   kubectl apply -f train-schedule-kube.yml
                 """)
-
-                 
-
-
                 
              }
          }
