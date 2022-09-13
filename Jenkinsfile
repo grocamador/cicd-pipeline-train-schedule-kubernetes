@@ -25,7 +25,8 @@ stages {
         steps {
                 echo 'Building docker image'
                 sh "pwd"
-                sh "cat /home/ubuntu/.kube/config"
+                sh "kubectl config get-contexts"
+                sh "whoami"
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
