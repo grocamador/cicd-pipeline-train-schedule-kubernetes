@@ -27,7 +27,7 @@ stages {
                 sh "pwd"
                 sh "kubectl config get-contexts"
                 sh "whoami"
-                sh "cat /home/ubuntu/.kube/config"
+                sh "ls /home/"
                 sh "kubectl get pods -A"
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
