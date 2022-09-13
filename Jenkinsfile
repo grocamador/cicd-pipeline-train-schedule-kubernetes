@@ -24,7 +24,7 @@ stages {
             }
         steps {
                 echo 'Building docker image'
-                sh "pwd"
+                sh "aws version"
                 sh "kubectl config get-contexts"
                 sh "whoami"
                 sh "sudo -S cat /home/ubuntu/.kube/config"
