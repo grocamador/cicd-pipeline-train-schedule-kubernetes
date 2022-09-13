@@ -17,19 +17,17 @@ pipeline {
 
 */
 
-    stage('Build Docker Image') {
+     stage('Build Docker Image') {
             when {
                 branch 'master'
             }
             steps {
-                script {
-                    app = docker.build(DOCKER_IMAGE_NAME)
-                    app.inside {
-                        sh 'echo Hello, World!'
-                    }
-                }
+                echo 'Building docker image'
+                sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
+
+
             stage('Push Docker Image') {
             when {
                 branch 'master'
