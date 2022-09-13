@@ -1,20 +1,12 @@
 pipeline {
     agent any
-    
     environment {
-        //be sure to replace "grocamador" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "grocamador/train-schedule"
-    //     CHKP_CLOUDGUARD_ID = credentials("chkp-id")
-    //    CHKP_CLOUDGUARD_SECRET = credentials("chkp-key")
-        SG_CLIENT_ID = credentials("source-id")
-        SG_SECRET_KEY = credentials("source-key")
-        KUBECONFIG = credentials("my-kubeconfig")
-
+        DOCKER_IMAGE_NAME = "grocamador/train-demo"
         }
     
     stages {
-       
-        
+
+/*
         stage('Test') {
             steps {
                 echo 'Running build automation'
@@ -22,7 +14,10 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage('Build Docker Image') {
+
+*/
+
+    stage('Build Docker Image') {
             when {
                 branch 'master'
             }
@@ -62,9 +57,6 @@ pipeline {
                   kubectl apply -f train-schedule-kube-stage.yml
                 """)
  
-                // Other tentative that didnt work:
- //            kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule
- //            kubectl set image deployment/train-schedule-deployment-stage train-schedule-stage=grocamador/train-schedule:latest
             }
         }
         
@@ -74,8 +66,7 @@ pipeline {
             }
              steps {              
                 input 'Deploy to Production?'
-                milestone(1)
-//              With KUBECTL and Kubeconfig       
+                milestone(1)   
               sh ("""                
                   echo \$KUBECONFIG
                   kubectl delete -f train-schedule-kube.yml
@@ -83,11 +74,7 @@ pipeline {
                 """)
 
                  
-//                 kubernetesDeploy(
-//                    kubeconfigId: 'kubeconfig',
-//                    configs: 'deploy.yml',
-//                    enableConfigSubstitution: true
-//                )
+
 
                 
              }
