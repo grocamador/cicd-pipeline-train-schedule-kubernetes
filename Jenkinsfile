@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = "grocamador/cicd-demo"
+        DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')
         }
     
 stages {
@@ -34,7 +35,10 @@ stages {
         }
         steps {
 
-                echo 'Pushing docker image with current build tag'
+                echo "Login in docker registry"
+                sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"                		
+	            echo 'Login Completed' 
+                echo "Pushing docker image with current build tag"
                 sh " docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
                 echo 'Pushing docker image with current latest'
                 sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
