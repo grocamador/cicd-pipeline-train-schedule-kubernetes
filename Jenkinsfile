@@ -7,14 +7,14 @@ pipeline {
     
 stages {
 
-        stage('Test') {
+/*        stage('Test') {
             steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
- //               archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+               archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-
+*/
 
 
     stage('Build Docker Image') {
@@ -31,6 +31,18 @@ stages {
             }
         }
 
+      stage('Scanning Image with Sysdig') {
+        steps {
+            
+            sh "echo grocamador/demo-scan:${env.BUILD_NUMBER} > sysdig_secure_images"
+            try {
+            sysdig engineCredentialsId: 'sysdig-secure-api-credentials', name: 'sysdig_secure_images', inlineScanning: true
+            }
+            catch (Exception e) {
+                            input "Sysdig Vulnerability scanner showed some security issues, Are you sure you want to continue?"  
+                        }
+        }
+       } 
 
     stage('Push Docker Image') {
         when {
