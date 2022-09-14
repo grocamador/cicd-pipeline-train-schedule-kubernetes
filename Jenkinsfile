@@ -37,7 +37,7 @@ stages {
             sh "echo ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} > sysdig_secure_images"
             script {
             try {
-            sysdigImageScan engineCredentialsId: 'sysdig-secure-api-credentials', name: "${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
+            sysdigImageScan engineCredentialsId: 'sysdig-secure-api-credentials', imageName: "${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
             }
             catch (Exception e) {
                             input "Sysdig Vulnerability scanner showed some security issues, Are you sure you want to continue?"  
