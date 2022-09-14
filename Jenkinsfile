@@ -34,10 +34,10 @@ stages {
       stage('Scanning Image with Sysdig') {
         steps {
             
-            sh "echo grocamador/demo-scan:${env.BUILD_NUMBER} > sysdig_secure_images"
+            sh "echo ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} > sysdig_secure_images"
             script {
             try {
-            sysdigImageScan engineCredentialsId: 'sysdig-secure-api-credentials', name: 'sysdig_secure_images'
+            sysdigImageScan engineCredentialsId: 'sysdig-secure-api-credentials', name: "${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
             }
             catch (Exception e) {
                             input "Sysdig Vulnerability scanner showed some security issues, Are you sure you want to continue?"  
