@@ -24,7 +24,7 @@ stages {
             }
         steps {
                 echo 'Building docker image'
-                sh "aws eks --region us-east-1 update-kubeconfig --name groca-eks"
+ //               sh "aws eks --region us-east-1 update-kubeconfig --name groca-eks"
                 sh "kubectl config get-contexts"
                 sh "whoami"
                 sh "kubectl get pods -A"
