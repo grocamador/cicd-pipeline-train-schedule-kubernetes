@@ -37,7 +37,7 @@ stages {
             sh "echo grocamador/demo-scan:${env.BUILD_NUMBER} > sysdig_secure_images"
             script {
             try {
-            sysdig engineCredentialsId: 'sysdig-secure-api-credentials', name: 'sysdig_secure_images', inlineScanning: true
+            sysdigImageScan engineCredentialsId: 'sysdig-secure-api-credentials', name: 'sysdig_secure_images'
             }
             catch (Exception e) {
                             input "Sysdig Vulnerability scanner showed some security issues, Are you sure you want to continue?"  
