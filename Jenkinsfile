@@ -35,7 +35,7 @@ stages {
         steps {
             
             sh "echo grocamador/demo-scan:${env.BUILD_NUMBER} > sysdig_secure_images"
-            srcipt {
+            script {
             try {
             sysdig engineCredentialsId: 'sysdig-secure-api-credentials', name: 'sysdig_secure_images', inlineScanning: true
             }
