@@ -23,7 +23,6 @@ stages {
             }
         steps {
                 echo 'Building docker image'
- //               sh "aws eks --region us-east-1 update-kubeconfig --name groca-eks"
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
@@ -68,10 +67,7 @@ stages {
             branch 'master'
         }
             steps {
-            echo "Getting existing pods"
-            sh "kubectl get pods -A"
-            echo "Getting nodes"
-            sh "kubectl get nodes"
+            echo "Deploying to Staging"
             sh ("""     
                   kubectl delete -f train-schedule-kube-stage.yml
                   kubectl apply -f train-schedule-kube-stage.yml
