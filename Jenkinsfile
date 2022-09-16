@@ -24,13 +24,11 @@ stages {
         steps {
                 echo 'Building docker image'
  //               sh "aws eks --region us-east-1 update-kubeconfig --name groca-eks"
-                sh "kubectl config get-contexts"
-                sh "whoami"
-                sh "kubectl get pods -A"
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
 
+/*
       stage('Scanning Image with Sysdig') {
         steps {
             
@@ -45,7 +43,7 @@ stages {
                     }
         }
        } 
-
+*/
     stage('Push Docker Image') {
         when {
             branch 'master'
