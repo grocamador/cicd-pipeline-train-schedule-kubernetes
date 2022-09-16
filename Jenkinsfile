@@ -27,7 +27,7 @@ stages {
             }
         }
 
-/*
+
       stage('Scanning Image with Sysdig') {
         steps {
             
@@ -42,7 +42,7 @@ stages {
                     }
         }
        } 
-*/
+
     stage('Push Docker Image') {
         when {
             branch 'master'
