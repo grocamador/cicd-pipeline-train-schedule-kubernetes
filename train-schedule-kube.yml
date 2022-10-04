@@ -12,8 +12,8 @@ spec:
     port: 8080
     nodePort: 30080
 
----
 
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,3 +37,5 @@ spec:
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
+        securityContext:
+          runAsUser: 1000
