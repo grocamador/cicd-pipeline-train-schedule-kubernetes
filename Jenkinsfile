@@ -2,14 +2,12 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY_NAME = "966508915346.dkr.ecr.us-east-1.amazonaws.com"
-        DOCKER_IMAGE_NAME = "emealab-cicd"
-        DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')
+        DOCKER_IMAGE_NAME = "crwdlab-cicd"
+     // DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')
 
         }
     
 stages {
-
- 
     stage('Build Docker Image') {
             when {
                 branch 'main'
@@ -19,25 +17,6 @@ stages {
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
-
- 
-      stage('Scanning Image with Sysdig') {
-	     when {
-                branch 'main'
-            }
-        steps {
-            
-            sh "echo ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} > sysdig_secure_images"
-            script {
-            try {
-            sysdigImageScan engineCredentialsId: 'sysdig-api-emealab', imageName: "${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
-            }
-            catch (Exception e) {
-                            input "Sysdig Vulnerability scanner showed some security issues, Are you sure you want to continue?"  
-                        }
-                    }
-        }
-       } 
 
     stage('Push Docker Image to ECR') {
         when {
