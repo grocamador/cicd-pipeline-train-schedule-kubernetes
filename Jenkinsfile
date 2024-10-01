@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_REGISTRY_NAME = "517716713836.dkr.ecr.eu-central-1.amazonaws.com/groca"
+        DOCKER_REGISTRY_NAME = "517716713836.dkr.ecr.eu-central-1.amazonaws.com"
         DOCKER_IMAGE_NAME = "groca/train"
      // DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')
 
@@ -45,8 +45,8 @@ stages {
              steps {              
 
               sh ("""
-	          kubectl delete -f account-portal.yaml                 
-                  kubectl apply -f account-portal.yaml
+
+                  kubectl apply -f train-schedule.yaml
                 """)
                 
              }
