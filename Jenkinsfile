@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        DOCKER_REGISTRY_NAME = "966508915346.dkr.ecr.us-east-1.amazonaws.com"
-        DOCKER_IMAGE_NAME = "crwdlab-cicd"
+        DOCKER_REGISTRY_NAME = "517716713836.dkr.ecr.eu-central-1.amazonaws.com/groca"
+        DOCKER_IMAGE_NAME = "groca/train"
      // DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')
 
         }
@@ -22,14 +22,11 @@ stages {
         when {
             branch 'main'
         }
-        environment {
-        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
-            }        
+      
         steps {
 
                 echo "Login on ECR"
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 966508915346.dkr.ecr.us-east-1.amazonaws.com"       		
+                sh "aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 517716713836.dkr.ecr.eu-central-1.amazonaws.com"       		
 	            echo 'Login Completed' 
                 echo "Pushing docker image to ECR with current build tag"
                 sh " docker tag ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ${DOCKER_REGISTRY_NAME}/${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
