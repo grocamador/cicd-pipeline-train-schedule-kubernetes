@@ -46,7 +46,7 @@ stages {
 
               sh ("""
 
-                  kubectl apply -f train-schedule.yaml
+                  kubectl apply -f train-schedule-prod.yaml
                 """)
                 
              }
