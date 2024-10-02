@@ -2,14 +2,15 @@ kind: Service
 apiVersion: v1
 metadata:
   name: train-schedule-service
+  namespace: train-prod
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: train-schedule
   ports:
   - protocol: TCP
     port: 8080
-    nodePort: 30100
+    
 
 ---
 
@@ -17,6 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: train-schedule-deployment
+  namespace: train-prod
   labels:
     app: train-schedule
 spec:
